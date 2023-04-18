@@ -1,0 +1,74 @@
+digraph CFA {
+7100 [shape="circle" label="N7100\n17"]
+7103 [shape="circle" label="N7103\n16"]
+7104 [shape="circle" label="N7104\n15"]
+7105 [shape="circle" label="N7105\n14"]
+7106 [shape="circle" label="N7106\n13"]
+7107 [shape="circle" label="N7107\n12"]
+7108 [shape="circle" label="N7108\n11"]
+7109 [shape="circle" label="N7109\n10"]
+7096 [shape="circle" label="N7096\n2"]
+7110 [shape="circle" label="N7110\n1"]
+7095 [shape="circle" label="N7095\n0"]
+7122 [shape="circle" label="N7122\n9"]
+7123 [shape="circle" label="N7123\n8"]
+7111 [shape="circle" label="N7111\n7"]
+7112 [shape="circle" label="N7112\n6"]
+7098 [shape="circle" label="N7098\n4"]
+7113 [shape="diamond" label="N7113\n3"]
+7114 [shape="circle" label="N7114\n2"]
+7097 [shape="circle" label="N7097\n0"]
+7115 [shape="diamond" label="N7115\n5"]
+7116 [shape="circle" label="N7116\n1"]
+7099 [shape="circle" label="N7099\n0"]
+7117 [shape="circle" label="N7117\n4"]
+7118 [shape="circle" label="N7118\n3"]
+7102 [shape="circle" label="N7102\n2"]
+7119 [shape="circle" label="N7119\n1"]
+7101 [shape="circle" label="N7101\n0"]
+7120 [shape="circle" label="N7120\n2"]
+7121 [shape="circle" label="N7121\n1"]
+node [shape="circle"]
+subgraph cluster___VERIFIER_error {
+label="__VERIFIER_error()"
+7102 -> 7119 [label="Function start dummy edge"]
+7119 -> 7101 [label="default return"]}
+subgraph cluster___VERIFIER_nondet_int {
+label="__VERIFIER_nondet_int()"
+7096 -> 7110 [label="Function start dummy edge"]
+7110 -> 7095 [label="return n;"]}
+subgraph cluster_main {
+label="main()"
+7100 -> 7103 [label="INIT GLOBAL VARS"]
+7103 -> 7104 [label="int __VERIFIER_error();"]
+7104 -> 7105 [label="int __VERIFIER_nondet_int(int);"]
+7105 -> 7106 [label="int sum(int, int);"]
+7106 -> 7107 [label="int main();"]
+7107 -> 7108 [label="Function start dummy edge"]
+7108 -> 7109 [label="int x;"]
+7109 -> 7122 [label="x = __VERIFIER_nondet_int(-1);" style="dotted" arrowhead="empty"]
+7122 -> 7123 [label="int y;"]
+7123 -> 7111 [label="y = __VERIFIER_nondet_int(2);" style="dotted" arrowhead="empty"]
+7111 -> 7112 [label="int z;"]
+7112 -> 7115 [label="z = sum(x, y);" style="dotted" arrowhead="empty"]
+7115 -> 7117 [label="[z != (x + y)]"]
+7115 -> 7116 [label="[!(z != (x + y))]"]
+7116 -> 7099 [label="return 0;"]
+7117 -> 7118 [label="Label: ERROR"]
+7118 -> 7120 [label="__VERIFIER_error();" style="dotted" arrowhead="empty"]
+7120 -> 7116 [label=""]}
+subgraph cluster_sum {
+label="sum()"
+7098 -> 7113 [label="Function start dummy edge"]
+7113 -> 7121 [label="[a <= 0]"]
+7113 -> 7114 [label="[!(a <= 0)]"]
+7114 -> 7097 [label="return (a - 1) + b;"]
+7121 -> 7097 [label="return a + b;"]}
+7109 -> 7096 [label="__VERIFIER_nondet_int(-1)"]
+7095 -> 7111 [label="Return edge from __VERIFIER_nondet_int to main: y = __VERIFIER_nondet_int(2);"]
+7095 -> 7122 [label="Return edge from __VERIFIER_nondet_int to main: x = __VERIFIER_nondet_int(-1);"]
+7123 -> 7096 [label="__VERIFIER_nondet_int(2)"]
+7112 -> 7098 [label="sum(x, y)"]
+7097 -> 7115 [label="Return edge from sum to main: z = sum(x, y);"]
+7118 -> 7102 [label="__VERIFIER_error()"]
+7101 -> 7120 [label="Return edge from __VERIFIER_error to main: __VERIFIER_error();"]}

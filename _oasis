@@ -1,0 +1,50 @@
+Name: llvm_tcfa
+Version: 0.1
+Synopsis: A library about radare and cfa.
+Authors: Me
+License: LGPL with OCaml linking exception
+Description: Translate llvm into cfa.
+OASISFormat: 0.4
+BuildTools: ocamlbuild
+Plugins: META (0.4), DevFiles (0.4)
+
+Library Cpachecker
+  Path: deps/temper/main/thrift/cpachecker/gen-ocaml
+  FindlibName: Cpachecker
+  BuildTools: ocamlbuild
+  BuildDepends: threads, thrift
+  Modules: Ctypes_consts, Ctypes_types,
+           Cast_consts, Cast_types,
+           Ccfa_consts, Ccfa_types,
+           Cresult_consts, Cresult_types,
+           Cpachecker_consts, Cpachecker_types,
+           CpaTcfaService
+  XMETARequires: threads
+
+Library Ultimate
+  Path: deps/temper/main/thrift/ultimate/gen-ocaml
+  FindlibName: Ultimate
+  BuildTools: ocamlbuild
+  BuildDepends: threads, thrift
+  Modules: Uidentifier_consts, Uidentifier_types,
+           Upredicate_consts, Upredicate_types,
+           Uast_consts, Uast_types,
+           Ucfg_consts, Ucfg_types,
+           Uautomata_consts, Uautomata_types,
+           Ultimate_consts, Ultimate_types,
+           UltimateService
+  XMETARequires: threads
+
+Library tcfa
+  Path: deps/temper/main/src
+  FindlibName: tcfa
+  BuildTools: ocamlbuild
+  BuildDepends: thrift, Cpachecker, Ultimate
+  Modules: Tast, Tcfa, Thrift_server
+
+Executable "llvm_tcfa"
+  Path: src
+  MainIs: llvm_tcfa.ml
+  Build$: true
+  CompiledObject: best
+  BuildDepends: tcfa, llvm, str, llvm.bitreader

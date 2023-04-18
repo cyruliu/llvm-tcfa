@@ -1,0 +1,55 @@
+# OASIS_START
+# DO NOT EDIT (digest: 0f8701a3e9535308230707642e5e2b78)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library Cpachecker
+"deps/temper/main/thrift/cpachecker/gen-ocaml/Cpachecker.cmxs": use_Cpachecker
+<deps/temper/main/thrift/cpachecker/gen-ocaml/*.ml{,i,y}>: pkg_threads
+<deps/temper/main/thrift/cpachecker/gen-ocaml/*.ml{,i,y}>: pkg_thrift
+# Library Ultimate
+"deps/temper/main/thrift/ultimate/gen-ocaml/Ultimate.cmxs": use_Ultimate
+<deps/temper/main/thrift/ultimate/gen-ocaml/*.ml{,i,y}>: pkg_threads
+<deps/temper/main/thrift/ultimate/gen-ocaml/*.ml{,i,y}>: pkg_thrift
+# Library tcfa
+"deps/temper/main/src/tcfa.cmxs": use_tcfa
+<deps/temper/main/src/*.ml{,i,y}>: pkg_threads
+<deps/temper/main/src/*.ml{,i,y}>: pkg_thrift
+<deps/temper/main/src/*.ml{,i,y}>: use_Cpachecker
+<deps/temper/main/src/*.ml{,i,y}>: use_Ultimate
+# Executable llvm_tcfa
+<src/llvm_tcfa.{native,byte}>: pkg_llvm
+<src/llvm_tcfa.{native,byte}>: pkg_llvm.bitreader
+<src/llvm_tcfa.{native,byte}>: pkg_str
+<src/llvm_tcfa.{native,byte}>: pkg_threads
+<src/llvm_tcfa.{native,byte}>: pkg_thrift
+<src/llvm_tcfa.{native,byte}>: use_Cpachecker
+<src/llvm_tcfa.{native,byte}>: use_Ultimate
+<src/llvm_tcfa.{native,byte}>: use_tcfa
+<src/*.ml{,i,y}>: pkg_llvm
+<src/*.ml{,i,y}>: pkg_llvm.bitreader
+<src/*.ml{,i,y}>: pkg_str
+<src/*.ml{,i,y}>: pkg_threads
+<src/*.ml{,i,y}>: pkg_thrift
+<src/*.ml{,i,y}>: use_Cpachecker
+<src/*.ml{,i,y}>: use_Ultimate
+<src/*.ml{,i,y}>: use_tcfa
+# OASIS_STOP
+
+#########################
+# customized _tags file
+
+<**/*.so>: -traverse
+<**/*.so>: not_hygienic
+
